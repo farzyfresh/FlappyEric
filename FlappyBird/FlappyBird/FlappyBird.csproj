@@ -98,5 +98,26 @@
   <ItemGroup>
     <None Include="Resources\pipedown.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\credits.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ericDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ericNormal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\help.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\soylent powerup.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\start.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\startscreenbackground.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
