@@ -47,10 +47,10 @@
             // flappyBird
             // 
             this.flappyBird.BackColor = System.Drawing.Color.Transparent;
-            this.flappyBird.Image = global::FlappyBird.Properties.Resources.ericNormal;
-            this.flappyBird.Location = new System.Drawing.Point(32, 161);
+            this.flappyBird.Image = global::FlappyBird.Properties.Resources.ericgif;
+            this.flappyBird.Location = new System.Drawing.Point(48, 205);
             this.flappyBird.Name = "flappyBird";
-            this.flappyBird.Size = new System.Drawing.Size(199, 153);
+            this.flappyBird.Size = new System.Drawing.Size(140, 83);
             this.flappyBird.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.flappyBird.TabIndex = 0;
             this.flappyBird.TabStop = false;

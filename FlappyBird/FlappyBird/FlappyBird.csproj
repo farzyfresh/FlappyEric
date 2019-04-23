@@ -46,11 +46,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreditsScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CreditsScreen.Designer.cs">
+      <DependentUpon>CreditsScreen.cs</DependentUpon>
+    </Compile>
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InstructionsScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InstructionsScreen.Designer.cs">
+      <DependentUpon>InstructionsScreen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MenuScreen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="MenuScreen.Designer.cs">
+      <DependentUpon>MenuScreen.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -118,6 +136,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\startscreenbackground.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\try2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ericgif.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\powerdown.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

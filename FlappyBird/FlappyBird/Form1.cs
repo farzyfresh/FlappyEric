@@ -21,6 +21,8 @@ namespace FlappyBird
         int speedPipe = 8;
         int gravity = 10;
         int gameScore = 0;
+        int recentScore = 0;
+        int highScore = 0;
 
         public flappyGame()
         {
@@ -28,9 +30,9 @@ namespace FlappyBird
 
             //end labels text; need to be set invisible till
             //the end of the game; final score and shit
-            endText1.Text = "lmao you lost";
-            endText2.Text = "Final Score:  " + gameScore;
-            gameDesigners.Text = "Game Designers: Farzana Fariha, Franz Inbavannan, Shishir Salam, & Tartil Chowdhury";
+            endText1.Text = "Final Score:  " + gameScore;
+            endText2.Text = "Highscore:  " + highScore;
+            gameDesigners.Text = "Game Designers: ";
 
             //here house to set the labels visible till the end
             endText1.Visible = false;
@@ -112,6 +114,13 @@ namespace FlappyBird
 
         private void endGame()
         {
+            //highscore shit
+            gameScore = recentScore;
+            if (recentScore > highScore)
+            {
+                highScore = recentScore;
+            }
+
             //how to manually stop the timer from running 
             gameTimer.Stop();
 
@@ -119,8 +128,6 @@ namespace FlappyBird
             endText1.Visible = true;
             endText2.Visible = true;
             gameDesigners.Visible = true;
-
-
         }
 
 

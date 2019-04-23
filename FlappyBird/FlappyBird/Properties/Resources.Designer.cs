@@ -103,6 +103,16 @@ namespace FlappyBird.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap ericgif {
+            get {
+                object obj = ResourceManager.GetObject("ericgif", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap ericNormal {
             get {
                 object obj = ResourceManager.GetObject("ericNormal", resourceCulture);
@@ -153,9 +163,19 @@ namespace FlappyBird.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap soylent_powerup {
+        internal static System.Drawing.Bitmap powerdown {
             get {
-                object obj = ResourceManager.GetObject("soylent_powerup", resourceCulture);
+                object obj = ResourceManager.GetObject("powerdown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap powerup {
+            get {
+                object obj = ResourceManager.GetObject("powerup", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -176,6 +196,16 @@ namespace FlappyBird.Properties {
         internal static System.Drawing.Bitmap startscreenbackground {
             get {
                 object obj = ResourceManager.GetObject("startscreenbackground", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap try2 {
+            get {
+                object obj = ResourceManager.GetObject("try2", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
