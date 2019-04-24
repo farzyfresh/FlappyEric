@@ -14,8 +14,6 @@ namespace FlappyUWP
         // The ratio of the screen that is sky versus ground
         const float SKYRATIO = 6f / 7f;
 
-        
-
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
 
@@ -23,9 +21,9 @@ namespace FlappyUWP
 
         float screenWidth;
         float screenHeight;
-        float broccoliSpeedMultiplier;
-        float dinoSpeedX;
-        float dinoJumpY;
+        float pipeSpeedMultiplier;
+        float birdSpeedX;
+        float birdJumpY;
         float gravitySpeed;
 
         bool spaceDown;
@@ -36,8 +34,8 @@ namespace FlappyUWP
         Texture2D startGameSplash;
         Texture2D gameOverTexture;
 
-        SpriteClass dino;
-        SpriteClass broccoli;
+        SpriteClass ericBird;
+        SpriteClass pipe;
         
         Random random;
 
@@ -64,7 +62,7 @@ namespace FlappyUWP
             screenHeight = ScaleToHighDPI((float)ApplicationView.GetForCurrentView().VisibleBounds.Height);
             screenWidth = ScaleToHighDPI((float)ApplicationView.GetForCurrentView().VisibleBounds.Width);
 
-            broccoliSpeedMultiplier = 0.5f;
+            pipeSpeedMultiplier = 0.5f;
 
             spaceDown = false;
             gameStarted = false;
@@ -72,8 +70,8 @@ namespace FlappyUWP
 
             random = new Random();
 
-            dinoSpeedX = ScaleToHighDPI(1000f);
-            dinoJumpY = ScaleToHighDPI(-600f);
+            birdSpeedX = ScaleToHighDPI(1000f);
+            birdJumpY = ScaleToHighDPI(-600f);
             gravitySpeed = ScaleToHighDPI(30f);
             score = 0;
 
@@ -94,9 +92,9 @@ namespace FlappyUWP
             gameOverTexture = Content.Load<Texture2D>("game-over");
 
             // Construct SpriteClass objects
-            dino = new SpriteClass(GraphicsDevice, "Content/try2.png", ScaleToHighDPI(0.3f));
+            ericBird = new SpriteClass(GraphicsDevice, "Content/try2.png", ScaleToHighDPI(0.3f));
             
-            broccoli = new SpriteClass(GraphicsDevice, "Content/pipe.png", ScaleToHighDPI(1f));
+            pipe = new SpriteClass(GraphicsDevice, "Content/pipe.png", ScaleToHighDPI(1f));
 
             // Load fonts
             scoreFont = Content.Load<SpriteFont>("Score");
@@ -120,49 +118,49 @@ namespace FlappyUWP
             // Stop all movement when the game ends
             if (gameOver)
             {
-                dino.dX = 0;
-                dino.dY = 0;
-                broccoli.dX = 0;
-                broccoli.dY = 0;
-                broccoli.dA = 0;
+                ericBird.dX = 0;
+                ericBird.dY = 0;
+                pipe.dX = 0;
+                pipe.dY = 0;
+                pipe.dA = 0;
             }
 
             // Update animated SpriteClass objects based on their current rates of change
-            dino.Update(elapsedTime);
-            broccoli.Update(elapsedTime);
+            ericBird.Update(elapsedTime);
+            pipe.Update(elapsedTime);
 
-            // Accelerate the dino downward each frame to simulate gravity.
-            dino.dY += gravitySpeed;
+            // Accelerate the ericBird downward each frame to simulate gravity.
+            ericBird.dY += gravitySpeed;
 
             // Set game floor
-            if (dino.y > screenHeight * SKYRATIO)
+            if (ericBird.y > screenHeight * SKYRATIO)
             {
-                dino.dY = 0;
-                dino.y = screenHeight * SKYRATIO;
+                ericBird.dY = 0;
+                ericBird.y = screenHeight * SKYRATIO;
             }
 
             // Set right edge
-            if (dino.x > screenWidth - dino.texture.Width / 2)
+            if (ericBird.x > screenWidth - ericBird.texture.Width / 2)
             {
-                dino.x = screenWidth - dino.texture.Width / 2;
-                dino.dX = 0;
+                ericBird.x = screenWidth - ericBird.texture.Width / 2;
+                ericBird.dX = 0;
             }
 
             // Set left edge
-            if (dino.x < 0 + dino.texture.Width / 2)
+            if (ericBird.x < 0 + ericBird.texture.Width / 2)
             {
-                dino.x = 0 + dino.texture.Width / 2;
-                dino.dX = 0;
+                ericBird.x = 0 + ericBird.texture.Width / 2;
+                ericBird.dX = 0;
             }
 
-            // If the broccoli goes offscreen, spawn a new one and iterate the score
-            if (broccoli.x > screenWidth + 100 || broccoli.x < -100)
+            // If the pipe goes offscreen, spawn a new one and iterate the score
+            if (pipe.x > screenWidth + 100 || pipe.x < -100)
             {
-                SpawnBroccoli();
+                SpawnPipe();
                 score++;
             }
 
-            if (dino.RectangleCollision(broccoli)) gameOver = true; // End game if the dino collides with the broccoli
+            if (ericBird.RectangleCollision(pipe)) gameOver = true; // End game if the ericBird collides with the pipe
 
             base.Update(gameTime);
         }
@@ -198,9 +196,9 @@ namespace FlappyUWP
             // If the game is not over, draw it in black
             else spriteBatch.DrawString(scoreFont, score.ToString(), new Vector2(screenWidth - 100, 50), Color.Black);
 
-            // Draw broccoli and dino with the SpriteClass method
-            broccoli.Draw(spriteBatch);
-            dino.Draw(spriteBatch);
+            // Draw pipe and ericBird with the SpriteClass method
+            pipe.Draw(spriteBatch);
+            ericBird.Draw(spriteBatch);
 
             if (!gameStarted)
             {
@@ -234,54 +232,54 @@ namespace FlappyUWP
         }
 
 
-        // Spawn the broccoli object in a random location offscreen
-        public void SpawnBroccoli()
+        // Spawn the pipe object in a random location offscreen
+        public void SpawnPipe()
         {
-            // Spawn broccoli either left (1), above (2), right (3), or below (4) the screen
+            // Spawn pipe either left (1), above (2), right (3), or below (4) the screen
             int direction = random.Next(1, 3);
             switch (direction)
             {
                 case 1:
-                    broccoli.x = screenWidth;
-                    broccoli.y = (int)screenHeight - 200;
+                    pipe.x = screenWidth;
+                    pipe.y = (int)screenHeight - 200;
                         //random.Next(0, (int)screenHeight);
                     break;
                 case 2:
-                    broccoli.x = screenWidth;
-                    broccoli.y = 200;
+                    pipe.x = screenWidth;
+                    pipe.y = 200;
                     break;
                 case 3:
-                    broccoli.x = screenWidth + 100;
-                    broccoli.y = random.Next(0, (int)screenHeight);
+                    pipe.x = screenWidth + 100;
+                    pipe.y = random.Next(0, (int)screenHeight);
                     break;
                 case 4:
-                    broccoli.y = screenHeight + 100;
-                    broccoli.x = random.Next(0, (int)screenWidth);
+                    pipe.y = screenHeight + 100;
+                    pipe.x = random.Next(0, (int)screenWidth);
                     break;
             }
 
-            if (score % 5 == 0) broccoliSpeedMultiplier += 0.2f; // Increase game difficulty (ie broccoli speed) for every five points scored
+            if (score % 5 == 0) pipeSpeedMultiplier += 0.2f; // Increase game difficulty (ie pipe speed) for every five points scored
 
-            // Orient the broccoli sprite towards the dino sprite and set angular velocity
-            broccoli.dX = (dino.x - broccoli.x) * broccoliSpeedMultiplier;
+            // Orient the pipe sprite towards the ericBird sprite and set angular velocity
+            pipe.dX = (ericBird.x - pipe.x) * pipeSpeedMultiplier;
 
 
-            //(dino.x - broccoli.x) * broccoliSpeedMultiplier;
-            broccoli.dY = 0;
-            //broccoli.dA = 0 ;
+            //(ericBird.x - pipe.x) * pipeSpeedMultiplier;
+            pipe.dY = 0;
+            //pipe.dA = 0 ;
         }
 
 
         // Start a new game, either when the app starts up or after game over
         public void StartGame()
         {
-            // Reset dino position
-            dino.x = screenWidth / 2;
-            dino.y = screenHeight * SKYRATIO;
+            // Reset ericBird position
+            ericBird.x = screenWidth / 2;
+            ericBird.y = screenHeight * SKYRATIO;
 
-            // Reset broccoli speed and respawn it
-            broccoliSpeedMultiplier = 0.5f;
-            SpawnBroccoli();
+            // Reset pipe speed and respawn it
+            pipeSpeedMultiplier = 0.5f;
+            SpawnPipe();
 
             score = 0; // Reset score
         }
@@ -296,7 +294,7 @@ namespace FlappyUWP
             if (state.IsKeyDown(Keys.Escape)) Exit();
 
             // Start the game if Space is pressed.
-            // Exit the keyboard handler method early, preventing the dino from jumping on the same keypress.
+            // Exit the keyboard handler method early, preventing the ericBird from jumping on the same keypress.
             if (!gameStarted)
             {
                 if (state.IsKeyDown(Keys.Space))
@@ -322,17 +320,17 @@ namespace FlappyUWP
             // Jump if Space (or another jump key) is pressed
             if (state.IsKeyDown(Keys.Space))
             {
-                // Jump if Space is pressed but not held and the dino is on the floor
-                if (!spaceDown) dino.dY = dinoJumpY;
+                // Jump if Space is pressed but not held and the ericBird is on the floor
+                if (!spaceDown) ericBird.dY = birdJumpY;
             
                 spaceDown = true;
             }
             else spaceDown = false;
 
             // Handle left and right
-            //if (state.IsKeyDown(Keys.Left) || state.IsKeyDown(Keys.A)) dino.dX = dinoSpeedX * -1;
-            //else if (state.IsKeyDown(Keys.Right) || state.IsKeyDown(Keys.D)) dino.dX = dinoSpeedX;
-            //else dino.dX = 0;
+            //if (state.IsKeyDown(Keys.Left) || state.IsKeyDown(Keys.A)) ericBird.dX = birdSpeedX * -1;
+            //else if (state.IsKeyDown(Keys.Right) || state.IsKeyDown(Keys.D)) ericBird.dX = birdSpeedX;
+            //else ericBird.dX = 0;
         }
     }
 }
