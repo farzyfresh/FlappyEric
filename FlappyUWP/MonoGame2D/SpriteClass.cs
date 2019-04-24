@@ -32,7 +32,7 @@ using System.Threading.Tasks;
 using Windows.UI.Xaml.Controls;
 using XamlAnimatedGif;
 
-namespace MonoGame2D
+namespace FlappyUWP
 {
     class SpriteClass
     {

@@ -7,7 +7,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using XamlAnimatedGif;
 
-namespace MonoGame2D
+namespace FlappyUWP
 {
     public class Game1 : Game
     {

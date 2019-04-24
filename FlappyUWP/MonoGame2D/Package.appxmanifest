@@ -14,7 +14,7 @@
   <mp:PhoneIdentity PhoneProductId="7e05943d-af2a-4105-8a80-eb18c64e4761" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>MonoGame2D</DisplayName>
+    <DisplayName>FlappyUWP</DisplayName>
     <PublisherDisplayName>Microsoft Corporation</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -30,12 +30,12 @@
   <Applications>
     <Application Id="App"
       Executable="$targetnametoken$.exe"
-      EntryPoint="MonoGame2D.App">
+      EntryPoint="FlappyUWP.App">
       <uap:VisualElements
-        DisplayName="MonoGame2D"
+        DisplayName="FlappyUWP"
         Square150x150Logo="Assets\Logo.png"
         Square44x44Logo="Assets\SmallLogo.png"
-        Description="MonoGame2D"
+        Description="FlappyUWP"
         BackgroundColor="#464646">
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>

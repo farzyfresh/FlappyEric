@@ -23,10 +23,10 @@
 -->
     
     <Application
-    x:Class="MonoGame2D.App"
+    x:Class="FlappyUWP.App"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:MonoGame2D"
+    xmlns:local="using:FlappyUWP"
     RequestedTheme="Light">
 
 </Application>
