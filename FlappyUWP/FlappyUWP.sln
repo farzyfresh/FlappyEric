@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.539
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlappyUWP", "MonoGame2D\FlappyUWP.csproj", "{248DF199-70CC-4321-BA6E-050F2A5BDA90}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlappyUWP", "FlappyUWP\FlappyUWP.csproj", "{248DF199-70CC-4321-BA6E-050F2A5BDA90}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
