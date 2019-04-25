@@ -88,8 +88,10 @@ namespace FlappyUWP
             startGameSplash = Content.Load<Texture2D>("start-splash");
             background = Content.Load<Texture2D>("background");
             gameOverTexture = Content.Load<Texture2D>("game-over");
-            //shutdown = Content.Load<Song>("shutdown");
+
+
             soundEffects.Add(Content.Load<SoundEffect>("shutdown"));
+            
 
             // Construct SpriteClass objects
             ericBird = new SpriteClass(GraphicsDevice, "Content/ericgif.gif", ScaleToHighDPI(0.3f));
@@ -168,7 +170,9 @@ namespace FlappyUWP
             if (ericBird.RectangleCollision(pipeTop) || ericBird.RectangleCollision(pipeBottom) || ericBird.RectangleCollision(pipeTop2) || ericBird.RectangleCollision(pipeBottom2) || ericBird.y > screenHeight)
             {
                 gameOver = true;
-                soundEffects[0].Play();
+                var shutdowneffect = soundEffects[0].CreateInstance();
+                shutdowneffect.IsLooped = false;
+                shutdowneffect.Play();
             }
 
             base.Update(gameTime);
