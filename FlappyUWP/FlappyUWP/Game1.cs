@@ -10,6 +10,8 @@ using System.Collections.Generic;
 
 namespace FlappyUWP
 {
+
+
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
@@ -377,3 +379,5 @@ namespace FlappyUWP
         }
     }
 }
+
+//https://docs.microsoft.com/en-us/windows/uwp/get-started/get-started-tutorial-game-mg2d
