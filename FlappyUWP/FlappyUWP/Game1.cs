@@ -30,6 +30,7 @@ namespace FlappyUWP
         bool spaceDown;
         bool gameStarted;
         bool gameOver;
+        bool credsShowing;
 
         Texture2D background;
         Texture2D startGameSplash;
@@ -69,6 +70,7 @@ namespace FlappyUWP
             spaceDown = false;
             gameStarted = false;
             gameOver = false;
+            credsShowing = false;
 
             random = new Random();
 
@@ -88,8 +90,6 @@ namespace FlappyUWP
             startGameSplash = Content.Load<Texture2D>("start-splash");
             background = Content.Load<Texture2D>("background");
             gameOverTexture = Content.Load<Texture2D>("game-over");
-
-
             soundEffects.Add(Content.Load<SoundEffect>("shutdown"));
             
 
@@ -129,8 +129,6 @@ namespace FlappyUWP
 
                 pipeBottom2.dX = 0;
                 pipeBottom2.dY = 0;
-
-               // PlayShutdown();
             }
 
             ericBird.Update(elapsedTime);
@@ -179,18 +177,32 @@ namespace FlappyUWP
 
         protected override void Draw(GameTime gameTime)
         {
+            
             GraphicsDevice.Clear(Color.SkyBlue);
 
             spriteBatch.Begin();
 
             spriteBatch.Draw(background, new Rectangle(0, 0, (int)screenWidth, (int)screenHeight), Color.White);
 
-            if (gameOver)
+            if (credsShowing)
+            {
+                String creds = "Made by a bunch of Monkeys";
+
+                // Measure the size of text in the given font
+                Vector2 credsSize = stateFont.MeasureString(creds);
+
+                // Draw the text horizontally centered
+                spriteBatch.DrawString(stateFont, creds, new Vector2(screenWidth / 2 - credsSize.X / 2, screenHeight/2), Color.White);
+            }
+
+
+            if (gameOver & credsShowing == false)
             {
                 // Draw game over texture
                 spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
 
-                String pressEnter = "Press Enter to restart!";
+                String pressEnter = "Press Enter to restart! Press C to show Credits";
+
                 PlayShutdown();
 
                 // Measure the size of text in the given font
@@ -205,7 +217,7 @@ namespace FlappyUWP
 
             else spriteBatch.DrawString(scoreFont, score.ToString(), new Vector2(screenWidth - 100, 50), Color.Black);
 
-            if(!gameOver)
+            if (!gameOver)
             {
                 pipeTop.Draw(spriteBatch);
                 pipeBottom.Draw(spriteBatch);
@@ -303,7 +315,8 @@ namespace FlappyUWP
             SpawnPipe2();
 
             isPlayed = false;
-            score = 0; // Reset score
+            score = 0;
+            credsShowing = false;
         }
 
         void KeyboardHandler()
@@ -332,6 +345,11 @@ namespace FlappyUWP
                 {
                     StartGame();
                     gameOver = false;
+                }
+
+                if (state.IsKeyDown(Keys.C))
+                {
+                    credsShowing = true;
                 }
             }
 
