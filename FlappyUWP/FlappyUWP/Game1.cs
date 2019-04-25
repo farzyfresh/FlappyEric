@@ -13,7 +13,7 @@ namespace FlappyUWP
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
-        Song shutdown;
+        //Song shutdown;
 
         int score = 0;
 
@@ -84,7 +84,7 @@ namespace FlappyUWP
             startGameSplash = Content.Load<Texture2D>("start-splash");
             background = Content.Load<Texture2D>("background");
             gameOverTexture = Content.Load<Texture2D>("game-over");
-            shutdown = Content.Load<Song>("shutdown");
+            //shutdown = Content.Load<Song>("shutdown");
 
             /*
             MediaPlayer.Play(shutdown);
@@ -111,8 +111,8 @@ namespace FlappyUWP
                                            EventArgs e)
         {
             // 0.0f is silent, 1.0f is full volume
-            MediaPlayer.Volume -= 0.1f;
-            MediaPlayer.Play(shutdown);
+            //MediaPlayer.Volume -= 0.1f;
+            //MediaPlayer.Play(shutdown);
         }
 
 
@@ -212,10 +212,10 @@ namespace FlappyUWP
 
             if(!gameOver)
             {
-                MediaPlayer.Play(shutdown);
+                //MediaPlayer.Play(shutdown);
                 //  Uncomment the following line will also loop the song
                 //  MediaPlayer.IsRepeating = true;
-                MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
+                //MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
 
                 pipeTop.Draw(spriteBatch);
                 pipeBottom.Draw(spriteBatch);
