@@ -167,12 +167,16 @@ namespace FlappyUWP
                 score++;
             }
 
-            if (ericBird.RectangleCollision(pipeTop) || ericBird.RectangleCollision(pipeBottom) || ericBird.RectangleCollision(pipeTop2) || ericBird.RectangleCollision(pipeBottom2) || ericBird.y > screenHeight)
+            if (ericBird.RectangleCollision(pipeTop) || ericBird.RectangleCollision(pipeBottom) || ericBird.RectangleCollision(pipeTop2) || ericBird.RectangleCollision(pipeBottom2))
             {
-                gameOver = true;
                 var shutdowneffect = soundEffects[0].CreateInstance();
                 shutdowneffect.IsLooped = false;
                 shutdowneffect.Play();
+            }
+
+            if (ericBird.RectangleCollision(pipeTop) || ericBird.RectangleCollision(pipeBottom) || ericBird.RectangleCollision(pipeTop2) || ericBird.RectangleCollision(pipeBottom2) || ericBird.y > screenHeight)
+            {
+                gameOver = true;
             }
 
             base.Update(gameTime);
