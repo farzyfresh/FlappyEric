@@ -31,6 +31,7 @@ namespace FlappyUWP
         bool gameStarted;
         bool gameOver;
         bool credsShowing;
+        bool helpShowing;
 
         Texture2D background;
         Texture2D startGameSplash;
@@ -47,6 +48,7 @@ namespace FlappyUWP
 
         SpriteFont scoreFont;
         SpriteFont stateFont;
+        SpriteFont credsFont;
 
 
         public Game1()
@@ -71,6 +73,7 @@ namespace FlappyUWP
             gameStarted = false;
             gameOver = false;
             credsShowing = false;
+            helpShowing = false;
 
             random = new Random();
 
@@ -105,6 +108,7 @@ namespace FlappyUWP
             // Load fonts
             scoreFont = Content.Load<SpriteFont>("Score");
             stateFont = Content.Load<SpriteFont>("GameState");
+            credsFont = Content.Load<SpriteFont>("Credits");
         }
 
 
@@ -186,17 +190,18 @@ namespace FlappyUWP
 
             if (credsShowing)
             {
-                String creds = "Made by a bunch of Monkeys";
+                spriteBatch.Draw(startGameSplash, new Rectangle(0, 0, (int)screenWidth, (int)screenHeight), Color.White);
+                String creds = "Created by Shishir Salam, Farzana Fariha, Franz Inbavanan, and Tartil Chowdhury \n Plus that badass dude that made a MonoGame Tutorial \n Press Enter to Play Again though";
 
                 // Measure the size of text in the given font
-                Vector2 credsSize = stateFont.MeasureString(creds);
+                Vector2 credsSize = credsFont.MeasureString(creds);
 
                 // Draw the text horizontally centered
-                spriteBatch.DrawString(stateFont, creds, new Vector2(screenWidth / 2 - credsSize.X / 2, screenHeight/2), Color.White);
+                spriteBatch.DrawString(credsFont, creds, new Vector2(screenWidth / 2 - credsSize.X / 2, screenHeight/2), Color.White);
             }
 
 
-            if (gameOver & credsShowing == false)
+            if (gameOver & !credsShowing)
             {
                 // Draw game over texture
                 spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
@@ -228,21 +233,32 @@ namespace FlappyUWP
                 ericBird.Draw(spriteBatch);
             }
 
-            if (!gameStarted)
+            if (!gameStarted & !helpShowing)
             {
-                // Fill the screen with black before the game starts
                 spriteBatch.Draw(startGameSplash, new Rectangle(0, 0, (int)screenWidth, (int)screenHeight), Color.White);
 
                 String title = "FLAPPY ERIC";
                 String pressSpace = "Press Space to start";
+                String helpMe = "Press H for help (really?)";
 
-                // Measure the size of text in the given font
                 Vector2 titleSize = stateFont.MeasureString(title);
                 Vector2 pressSpaceSize = stateFont.MeasureString(pressSpace);
+                Vector2 helpMeSize = stateFont.MeasureString(helpMe);
 
-                // Draw the text horizontally centered
                 spriteBatch.DrawString(stateFont, title, new Vector2(screenWidth / 2 - titleSize.X / 2, screenHeight / 3), Color.ForestGreen);
                 spriteBatch.DrawString(stateFont, pressSpace, new Vector2(screenWidth / 2 - pressSpaceSize.X / 2, screenHeight / 2), Color.White);
+                spriteBatch.DrawString(stateFont, helpMe, new Vector2(screenWidth / 2 - helpMeSize.X / 2, screenHeight - screenHeight / 3), Color.White);
+            }
+
+            if (helpShowing)
+            {
+                spriteBatch.Draw(startGameSplash, new Rectangle(0, 0, (int)screenWidth, (int)screenHeight), Color.White);
+
+                String helpText = "Bro there's literally only one control.. space. \n Hit space to play dawg.";
+
+                Vector2 helpTextSize = credsFont.MeasureString(helpText);
+
+                spriteBatch.DrawString(credsFont, helpText, new Vector2(screenWidth / 2 - helpTextSize.X / 2, screenHeight / 2), Color.White);
             }
 
             spriteBatch.End();
@@ -317,6 +333,7 @@ namespace FlappyUWP
             isPlayed = false;
             score = 0;
             credsShowing = false;
+            helpShowing = false;
         }
 
         void KeyboardHandler()
@@ -336,6 +353,12 @@ namespace FlappyUWP
                     spaceDown = true;
                     gameOver = false;
                 }
+
+                if (state.IsKeyDown(Keys.H))
+                {
+                    helpShowing = true;
+                }
+
                 return;
             }
 
