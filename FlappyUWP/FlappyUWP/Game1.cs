@@ -39,6 +39,10 @@ namespace FlappyUWP
         Texture2D startGameSplash;
         Texture2D gameOverTexture;
 
+        Texture2D howtoTexture;
+        Texture2D creditsTexture;
+        Texture2D logoTexture;
+
         SpriteClass ericBird;
 
         SpriteClass pipeTop;
@@ -93,6 +97,12 @@ namespace FlappyUWP
             startGameSplash = Content.Load<Texture2D>("start-splash");
             background = Content.Load<Texture2D>("background");
             gameOverTexture = Content.Load<Texture2D>("game-over");
+
+            howtoTexture = Content.Load<Texture2D>("howto");
+            creditsTexture = Content.Load<Texture2D>("creds");
+            logoTexture = Content.Load<Texture2D>("flappyeric");
+
+
             soundEffects.Add(Content.Load<SoundEffect>("shutdown"));
 
             ericBird = new SpriteClass(GraphicsDevice, "Content/ericgif.gif", ScaleToHighDPI(0.3f));
@@ -190,7 +200,8 @@ namespace FlappyUWP
 
                 Vector2 credsSize = credsFont.MeasureString(creds);
 
-                spriteBatch.DrawString(credsFont, creds, new Vector2(screenWidth / 2 - credsSize.X / 2, screenHeight/2), Color.White);
+                //spriteBatch.DrawString(credsFont, creds, new Vector2(screenWidth / 2 - credsSize.X / 2, screenHeight/2), Color.White);
+                spriteBatch.Draw(creditsTexture, new Vector2(screenWidth / 2 - creditsTexture.Width / 2, screenHeight / 2 - creditsTexture.Width / 2), Color.White);
             }
 
 
@@ -237,9 +248,11 @@ namespace FlappyUWP
                 Vector2 pressSpaceSize = stateFont.MeasureString(pressSpace);
                 Vector2 helpMeSize = stateFont.MeasureString(helpMe);
 
-                spriteBatch.DrawString(stateFont, title, new Vector2(screenWidth / 2 - titleSize.X / 2, screenHeight / 3), Color.ForestGreen);
-                spriteBatch.DrawString(stateFont, pressSpace, new Vector2(screenWidth / 2 - pressSpaceSize.X / 2, screenHeight / 2), Color.White);
-                spriteBatch.DrawString(stateFont, helpMe, new Vector2(screenWidth / 2 - helpMeSize.X / 2, screenHeight - screenHeight / 3), Color.White);
+                spriteBatch.Draw(logoTexture, new Vector2(screenWidth / 2 - logoTexture.Width / 2, screenHeight / 2 - logoTexture.Width / 2), Color.White);
+
+                //spriteBatch.DrawString(stateFont, title, new Vector2(screenWidth / 2 - titleSize.X / 2, screenHeight / 3), Color.ForestGreen);
+                //spriteBatch.DrawString(stateFont, pressSpace, new Vector2(screenWidth / 2 - pressSpaceSize.X / 2, screenHeight / 2), Color.White);
+                //spriteBatch.DrawString(stateFont, helpMe, new Vector2(screenWidth / 2 - helpMeSize.X / 2, screenHeight - screenHeight / 3), Color.White);
             }
 
             if (helpShowing)
@@ -250,7 +263,8 @@ namespace FlappyUWP
 
                 Vector2 helpTextSize = credsFont.MeasureString(helpText);
 
-                spriteBatch.DrawString(credsFont, helpText, new Vector2(screenWidth / 2 - helpTextSize.X / 2, screenHeight / 2), Color.White);
+                //spriteBatch.DrawString(credsFont, helpText, new Vector2(screenWidth / 2 - helpTextSize.X / 2, screenHeight / 2), Color.White);
+                spriteBatch.Draw(howtoTexture, new Vector2(screenWidth / 2 - howtoTexture.Width / 2, screenHeight / 2 - howtoTexture.Width / 2), Color.White);
             }
 
             spriteBatch.End();
