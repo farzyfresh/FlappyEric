@@ -15,8 +15,8 @@ namespace FlappyUWP
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         List<SoundEffect> soundEffects;
-        
-        //Song shutdown;
+
+        bool isPlayed = false;
 
         int score = 0;
 
@@ -185,7 +185,7 @@ namespace FlappyUWP
 
             if (gameOver)
             {
-                PlayShutdown();
+                //PlayShutdown();
 
                 // Draw game over texture
                 spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
@@ -246,15 +246,13 @@ namespace FlappyUWP
 
         public void PlayShutdown()
         {
-            bool isPlayed = true;
-
-            while(isPlayed = true)
+            if(isPlayed == false)
             {
                 var shutdowneffect = soundEffects[0].CreateInstance();
                 shutdowneffect.IsLooped = false;
                 shutdowneffect.Play();
 
-                isPlayed = false;
+                isPlayed = true;
             }
 
         }
@@ -303,6 +301,7 @@ namespace FlappyUWP
             SpawnPipe();
             SpawnPipe2();
 
+            isPlayed = false;
             score = 0; // Reset score
         }
 
