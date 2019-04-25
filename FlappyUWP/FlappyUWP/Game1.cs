@@ -129,6 +129,8 @@ namespace FlappyUWP
 
                 pipeBottom2.dX = 0;
                 pipeBottom2.dY = 0;
+
+               // PlayShutdown();
             }
 
             ericBird.Update(elapsedTime);
@@ -185,12 +187,11 @@ namespace FlappyUWP
 
             if (gameOver)
             {
-                //PlayShutdown();
-
                 // Draw game over texture
                 spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
 
                 String pressEnter = "Press Enter to restart!";
+                PlayShutdown();
 
                 // Measure the size of text in the given font
                 Vector2 pressEnterSize = stateFont.MeasureString(pressEnter);
@@ -246,7 +247,7 @@ namespace FlappyUWP
 
         public void PlayShutdown()
         {
-            if(isPlayed == false)
+            if(isPlayed == false & gameStarted == true)
             {
                 var shutdowneffect = soundEffects[0].CreateInstance();
                 shutdowneffect.IsLooped = false;
