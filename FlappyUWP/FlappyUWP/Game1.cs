@@ -86,10 +86,12 @@ namespace FlappyUWP
             gameOverTexture = Content.Load<Texture2D>("game-over");
             shutdown = Content.Load<Song>("shutdown");
 
+            /*
             MediaPlayer.Play(shutdown);
             //  Uncomment the following line will also loop the song
             //  MediaPlayer.IsRepeating = true;
             MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
+            */
 
             // Construct SpriteClass objects
             ericBird = new SpriteClass(GraphicsDevice, "Content/ericgif.gif", ScaleToHighDPI(0.3f));
@@ -210,6 +212,11 @@ namespace FlappyUWP
 
             if(!gameOver)
             {
+                MediaPlayer.Play(shutdown);
+                //  Uncomment the following line will also loop the song
+                //  MediaPlayer.IsRepeating = true;
+                MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
+
                 pipeTop.Draw(spriteBatch);
                 pipeBottom.Draw(spriteBatch);
 
