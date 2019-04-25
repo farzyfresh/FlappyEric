@@ -91,13 +91,6 @@ namespace FlappyUWP
             //shutdown = Content.Load<Song>("shutdown");
             soundEffects.Add(Content.Load<SoundEffect>("shutdown"));
 
-            /*
-            MediaPlayer.Play(shutdown);
-            //  Uncomment the following line will also loop the song
-            //  MediaPlayer.IsRepeating = true;
-            MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
-            */
-
             // Construct SpriteClass objects
             ericBird = new SpriteClass(GraphicsDevice, "Content/ericgif.gif", ScaleToHighDPI(0.3f));
             
@@ -175,6 +168,7 @@ namespace FlappyUWP
             if (ericBird.RectangleCollision(pipeTop) || ericBird.RectangleCollision(pipeBottom) || ericBird.RectangleCollision(pipeTop2) || ericBird.RectangleCollision(pipeBottom2) || ericBird.y > screenHeight)
             {
                 gameOver = true;
+                soundEffects[0].Play();
             }
 
             base.Update(gameTime);
@@ -190,8 +184,6 @@ namespace FlappyUWP
 
             if (gameOver)
             {
-                soundEffects[0].Play();
-
                 // Draw game over texture
                 spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
 
@@ -211,11 +203,6 @@ namespace FlappyUWP
 
             if(!gameOver)
             {
-                //MediaPlayer.Play(shutdown);
-                //  Uncomment the following line will also loop the song
-                //  MediaPlayer.IsRepeating = true;
-                //MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
-
                 pipeTop.Draw(spriteBatch);
                 pipeBottom.Draw(spriteBatch);
 
