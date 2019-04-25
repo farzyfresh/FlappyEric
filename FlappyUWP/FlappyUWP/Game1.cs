@@ -116,6 +116,10 @@ namespace FlappyUWP
 
             if (gameOver)
             {
+                var shutdowneffect = soundEffects[0].CreateInstance();
+                shutdowneffect.IsLooped = false;
+                shutdowneffect.Play();
+
                 ericBird.dY = 0;
 
                 pipeTop.dX = 0;
@@ -165,13 +169,6 @@ namespace FlappyUWP
             {
                 SpawnPipe2();
                 score++;
-            }
-
-            if (ericBird.RectangleCollision(pipeTop) || ericBird.RectangleCollision(pipeBottom) || ericBird.RectangleCollision(pipeTop2) || ericBird.RectangleCollision(pipeBottom2))
-            {
-                var shutdowneffect = soundEffects[0].CreateInstance();
-                shutdowneffect.IsLooped = false;
-                shutdowneffect.Play();
             }
 
             if (ericBird.RectangleCollision(pipeTop) || ericBird.RectangleCollision(pipeBottom) || ericBird.RectangleCollision(pipeTop2) || ericBird.RectangleCollision(pipeBottom2) || ericBird.y > screenHeight)
