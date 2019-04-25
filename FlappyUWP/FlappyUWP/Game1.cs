@@ -196,7 +196,7 @@ namespace FlappyUWP
 
             if (gameOver & !credsShowing)
             {
-                spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
+                spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 3 - gameOverTexture.Width / 2), Color.White);
 
                 String pressEnter = "Press Enter to restart! Press C to show Credits";
 
@@ -206,7 +206,7 @@ namespace FlappyUWP
                 Vector2 pressEnterSize = stateFont.MeasureString(pressEnter);
 
                 // Draw the text horizontally centered
-                spriteBatch.DrawString(stateFont, pressEnter, new Vector2(screenWidth / 2 - pressEnterSize.X / 2, screenHeight - 200), Color.White);
+                spriteBatch.DrawString(stateFont, pressEnter, new Vector2(screenWidth / 2 - pressEnterSize.X / 2, screenHeight - screenHeight/3), Color.White);
 
                 // If the game is over, draw the score in red
                 spriteBatch.DrawString(scoreFont, score.ToString(), new Vector2(screenWidth - 100, 50), Color.Red);
