@@ -77,7 +77,7 @@
 
 #begin shutdown.mp3
 /importer:Mp3Importer
-/processor:SongProcessor
+/processor:SoundEffectProcessor
 /processorParam:Quality=Best
 /build:shutdown.mp3
 

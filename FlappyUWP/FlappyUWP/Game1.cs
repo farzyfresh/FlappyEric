@@ -1,11 +1,12 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
-using Microsoft.Xna.Framework.Media;
+using Microsoft.Xna.Framework.Audio;
 using System;
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
+using System.Collections.Generic;
 
 namespace FlappyUWP
 {
@@ -13,6 +14,8 @@ namespace FlappyUWP
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        List<SoundEffect> soundEffects;
+        
         //Song shutdown;
 
         int score = 0;
@@ -49,6 +52,7 @@ namespace FlappyUWP
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            soundEffects = new List<SoundEffect>();
         }
 
         protected override void Initialize()
@@ -85,6 +89,7 @@ namespace FlappyUWP
             background = Content.Load<Texture2D>("background");
             gameOverTexture = Content.Load<Texture2D>("game-over");
             //shutdown = Content.Load<Song>("shutdown");
+            soundEffects.Add(Content.Load<SoundEffect>("shutdown"));
 
             /*
             MediaPlayer.Play(shutdown);
@@ -105,14 +110,6 @@ namespace FlappyUWP
             // Load fonts
             scoreFont = Content.Load<SpriteFont>("Score");
             stateFont = Content.Load<SpriteFont>("GameState");
-        }
-
-        void MediaPlayer_MediaStateChanged(object sender, System.
-                                           EventArgs e)
-        {
-            // 0.0f is silent, 1.0f is full volume
-            //MediaPlayer.Volume -= 0.1f;
-            //MediaPlayer.Play(shutdown);
         }
 
 
@@ -193,6 +190,8 @@ namespace FlappyUWP
 
             if (gameOver)
             {
+                soundEffects[0].Play();
+
                 // Draw game over texture
                 spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
 
@@ -278,6 +277,8 @@ namespace FlappyUWP
             pipeBottom2.x = pipeBottom.x + (screenWidth / 2);
             pipeTop2.y = random.Next(-100, 100);
             pipeBottom2.y = (int) screenHeight - random.Next(-100, 100);
+
+            //if (score % 5 == 0) pipeSpeedMultiplier += 0.2f;
 
             pipeTop2.dX = pipeTop.dX;
             pipeBottom2.dX = pipeTop.dX;
