@@ -50,7 +50,6 @@ namespace FlappyUWP
         SpriteFont stateFont;
         SpriteFont credsFont;
 
-
         public Game1()
         {
             graphics = new GraphicsDeviceManager(this);
@@ -89,14 +88,11 @@ namespace FlappyUWP
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            // Load textures
             startGameSplash = Content.Load<Texture2D>("start-splash");
             background = Content.Load<Texture2D>("background");
             gameOverTexture = Content.Load<Texture2D>("game-over");
             soundEffects.Add(Content.Load<SoundEffect>("shutdown"));
-            
 
-            // Construct SpriteClass objects
             ericBird = new SpriteClass(GraphicsDevice, "Content/ericgif.gif", ScaleToHighDPI(0.3f));
             
             pipeTop = new SpriteClass(GraphicsDevice, "Content/pipedown.png", ScaleToHighDPI(1f));
@@ -105,7 +101,6 @@ namespace FlappyUWP
             pipeTop2 = new SpriteClass(GraphicsDevice, "Content/pipedown.png", ScaleToHighDPI(1f));
             pipeBottom2 = new SpriteClass(GraphicsDevice, "Content/pipeup.png", ScaleToHighDPI(1f));
 
-            // Load fonts
             scoreFont = Content.Load<SpriteFont>("Score");
             stateFont = Content.Load<SpriteFont>("GameState");
             credsFont = Content.Load<SpriteFont>("Credits");
@@ -145,14 +140,12 @@ namespace FlappyUWP
 
             ericBird.dY += gravitySpeed;
 
-            // Set right edge
             if (ericBird.x > screenWidth - ericBird.texture.Width / 2)
             {
                 ericBird.x = screenWidth - ericBird.texture.Width / 2;
                 ericBird.dX = 0;
             }
 
-            // Set left edge
             if (ericBird.x < 0 + ericBird.texture.Width / 2)
             {
                 ericBird.x = 0 + ericBird.texture.Width / 2;
@@ -193,17 +186,14 @@ namespace FlappyUWP
                 spriteBatch.Draw(startGameSplash, new Rectangle(0, 0, (int)screenWidth, (int)screenHeight), Color.White);
                 String creds = "Created by Shishir Salam, Farzana Fariha, Franz Inbavanan, and Tartil Chowdhury \n Plus that badass dude that made a MonoGame Tutorial \n Press Enter to Play Again though";
 
-                // Measure the size of text in the given font
                 Vector2 credsSize = credsFont.MeasureString(creds);
 
-                // Draw the text horizontally centered
                 spriteBatch.DrawString(credsFont, creds, new Vector2(screenWidth / 2 - credsSize.X / 2, screenHeight/2), Color.White);
             }
 
 
             if (gameOver & !credsShowing)
             {
-                // Draw game over texture
                 spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
 
                 String pressEnter = "Press Enter to restart! Press C to show Credits";
@@ -288,14 +278,17 @@ namespace FlappyUWP
 
         public void SpawnPipe()
         {
+            int stagger = random.Next((int)(0 - (screenHeight * 0.15)), (int)(screenHeight * 0.15));
+
             pipeTop.x = screenWidth;
             pipeBottom.x = screenWidth;
-            pipeTop.y = random.Next(-100, 100);
-            pipeBottom.y = (int)screenHeight - random.Next(-100, 100);
+            //pipeTop.y = random.Next(-100, 100);
+            //pipeBottom.y = (int)screenHeight - random.Next(-100, 100);
+            pipeTop.y = random.Next((int)(0 - (screenHeight * 0.04)), (int)(screenHeight * 0.10)) + stagger;
+            pipeBottom.y = (int)screenHeight - random.Next((int)(0 - (screenHeight * 0.04)), (int)(screenHeight * 0.10)) + stagger;
 
             if (score % 5 == 0) pipeSpeedMultiplier += 0.2f;
 
-            // Orient the pipe sprite towards the ericBird sprite and set velocity
             pipeTop.dX = (ericBird.x - pipeTop.x) * pipeSpeedMultiplier;
             pipeBottom.dX = (ericBird.x - pipeBottom.x) * pipeSpeedMultiplier;
 
@@ -305,12 +298,14 @@ namespace FlappyUWP
 
         public void SpawnPipe2()
         {
+            int stagger = random.Next((int)(0 - (screenHeight * 0.15)), (int)(screenHeight * 0.15));
+
             pipeTop2.x = pipeTop.x + (screenWidth / 2);
             pipeBottom2.x = pipeBottom.x + (screenWidth / 2);
-            pipeTop2.y = random.Next(-100, 100);
-            pipeBottom2.y = (int) screenHeight - random.Next(-100, 100);
-
-            //if (score % 5 == 0) pipeSpeedMultiplier += 0.2f;
+            //pipeTop2.y = random.Next(-100, 100);
+            //pipeBottom2.y = (int) screenHeight - random.Next(-100, 100);
+            pipeTop2.y = random.Next((int)(0 - (screenHeight * 0.04)), (int)(screenHeight * 0.10)) + stagger;
+            pipeBottom2.y = (int)screenHeight - random.Next((int)(0 - (screenHeight * 0.04)), (int)(screenHeight * 0.10)) + stagger;
 
             pipeTop2.dX = pipeTop.dX;
             pipeBottom2.dX = pipeTop.dX;
@@ -321,11 +316,9 @@ namespace FlappyUWP
 
         public void StartGame()
         {
-            // Reset ericBird position
             ericBird.x = screenWidth / 2;
             ericBird.y = screenHeight / 2;
 
-            // Reset pipe speed and respawn them
             pipeSpeedMultiplier = 0.5f;
             SpawnPipe();
             SpawnPipe2();
@@ -339,11 +332,9 @@ namespace FlappyUWP
         void KeyboardHandler()
         {
             KeyboardState state = Keyboard.GetState();
-            
-            // Quit the game if Escape is pressed
+
             if (state.IsKeyDown(Keys.Escape)) Exit();
 
-            // Start the game if Space is pressed.
             if (!gameStarted)
             {
                 if (state.IsKeyDown(Keys.Space))
@@ -376,7 +367,6 @@ namespace FlappyUWP
                 }
             }
 
-            // Jump if Space (or another jump key) is pressed
             if (state.IsKeyDown(Keys.Space))
             {
                 if (!spaceDown) ericBird.dY = ericBirdJumpY;
