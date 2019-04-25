@@ -1,6 +1,7 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Microsoft.Xna.Framework.Media;
 using System;
 using Windows.Graphics.Display;
 using Windows.UI.ViewManagement;
@@ -12,6 +13,7 @@ namespace FlappyUWP
     {
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
+        Song shutdown;
 
         int score = 0;
 
@@ -82,6 +84,12 @@ namespace FlappyUWP
             startGameSplash = Content.Load<Texture2D>("start-splash");
             background = Content.Load<Texture2D>("background");
             gameOverTexture = Content.Load<Texture2D>("game-over");
+            shutdown = Content.Load<Song>("shutdown");
+
+            MediaPlayer.Play(shutdown);
+            //  Uncomment the following line will also loop the song
+            //  MediaPlayer.IsRepeating = true;
+            MediaPlayer.MediaStateChanged += MediaPlayer_MediaStateChanged;
 
             // Construct SpriteClass objects
             ericBird = new SpriteClass(GraphicsDevice, "Content/ericgif.gif", ScaleToHighDPI(0.3f));
@@ -96,6 +104,15 @@ namespace FlappyUWP
             scoreFont = Content.Load<SpriteFont>("Score");
             stateFont = Content.Load<SpriteFont>("GameState");
         }
+
+        void MediaPlayer_MediaStateChanged(object sender, System.
+                                           EventArgs e)
+        {
+            // 0.0f is silent, 1.0f is full volume
+            MediaPlayer.Volume -= 0.1f;
+            MediaPlayer.Play(shutdown);
+        }
+
 
         protected override void Update(GameTime gameTime)
         {
