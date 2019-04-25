@@ -116,10 +116,6 @@ namespace FlappyUWP
 
             if (gameOver)
             {
-                var shutdowneffect = soundEffects[0].CreateInstance();
-                shutdowneffect.IsLooped = false;
-                shutdowneffect.Play();
-
                 ericBird.dY = 0;
 
                 pipeTop.dX = 0;
@@ -189,6 +185,8 @@ namespace FlappyUWP
 
             if (gameOver)
             {
+                PlayShutdown();
+
                 // Draw game over texture
                 spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 4 - gameOverTexture.Width / 2), Color.White);
 
@@ -244,6 +242,21 @@ namespace FlappyUWP
             DisplayInformation d = DisplayInformation.GetForCurrentView();
             f *= (float)d.RawPixelsPerViewPixel;
             return f;
+        }
+
+        public void PlayShutdown()
+        {
+            bool isPlayed = true;
+
+            while(isPlayed = true)
+            {
+                var shutdowneffect = soundEffects[0].CreateInstance();
+                shutdowneffect.IsLooped = false;
+                shutdowneffect.Play();
+
+                isPlayed = false;
+            }
+
         }
 
         public void SpawnPipe()
