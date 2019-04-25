@@ -118,8 +118,10 @@
   <ItemGroup>
     <Content Include="Content\ericgif.gif" />
     <Content Include="Content\game-over.png" />
-    <Content Include="Content\grass.png" />
     <Content Include="Content\pipe.png" />
+    <Content Include="Content\pipedown.png" />
+    <Content Include="Content\pipegapped.png" />
+    <Content Include="Content\pipeup.png" />
     <Content Include="Content\start-splash.png" />
     <Content Include="Content\try2.png" />
     <Content Include="Properties\Default.rd.xml" />
@@ -130,7 +132,7 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
-    <Content Include="Resources\background.jpg" />
+    <Content Include="Content\background.jpg" />
     <Content Include="Resources\bird.png" />
     <Content Include="Resources\credits.png" />
     <Content Include="Resources\ericDown.png" />
