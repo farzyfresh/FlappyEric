@@ -196,7 +196,7 @@ namespace FlappyUWP
 
             if (gameOver & !credsShowing)
             {
-                spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 3 - gameOverTexture.Width / 2), Color.White);
+                spriteBatch.Draw(gameOverTexture, new Vector2(screenWidth / 2 - gameOverTexture.Width / 2, screenHeight / 2 - gameOverTexture.Width / 2), Color.White);
 
                 String pressEnter = "Press Enter to restart! Press C to show Credits";
 
